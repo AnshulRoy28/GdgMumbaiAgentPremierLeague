@@ -1,0 +1,23 @@
+# Virtual environment
+venv/
+
+# Environment variables (secrets)
+.env
+.env.local
+.env.*
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# SQLite database
+*.db
+
+# Temporary/scratch files
+scratch/
+
+# Editor files
+.vscode/
+.idea/

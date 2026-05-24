@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - AI Educational Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">T</div>
+            <span>Teacher Analytics Hub</span>
+        </div>
+        <nav>
+            <a href="student.html">Student Tutor</a>
+            <a href="teacher.html" class="active">Teacher Dashboard</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-grid">
+            <!-- Sidebar Panel: Uploads and Materials -->
+            <section class="sidebar-panel">
+                <!-- Document Ingestion Card -->
+                <div class="card">
+                    <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="upload-cloud" style="color: var(--accent-cyan);"></i> Ingest Materials
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label for="upload-subject-select">Subject Area</label>
+                        <select id="upload-subject-select">
+                            <option value="General">General</option>
+                            <option value="custom">Create New Subject...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="custom-subject-group" style="display: none;">
+                        <label for="upload-subject-custom">New Subject Name</label>
+                        <input type="text" id="upload-subject-custom" placeholder="e.g. Fractions, History, Grammar">
+                    </div>
+
+                    <div class="upload-zone" id="upload-zone">
+                        <i data-lucide="file-text" class="upload-icon"></i>
+                        <p style="font-weight: 500; font-size: 0.875rem;">Drag & Drop PDF or PPTX</p>
+                        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">or click to browse files</p>
+                        <input type="file" id="file-input" style="display: none;" accept=".pdf,.pptx,.ppt">
+                    </div>
+                    
+                    <div id="upload-status" style="font-size: 0.875rem; margin-top: 0.75rem; text-align: center; min-height: 1.25rem;"></div>
+                </div>
+
+                <!-- Resources List -->
+                <div class="card" style="flex: 1;">
+                    <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="book-open" style="color: var(--accent-purple);"></i> Learning Resources
+                    </h2>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 1rem;">Materials uploaded for AI grounding (RAG).</p>
+                    
+                    <div class="document-list" id="document-list">
+                        <!-- Documents dynamically inserted here -->
+                        <div style="font-size: 0.875rem; color: var(--text-secondary); text-align: center; padding: 2rem 0;">No documents uploaded yet.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Panel: Student Progress and Real-time Activity -->
+            <section class="main-panel">
+                <!-- Insights Stat Cards -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-label">Active Students</div>
+                        <div class="stat-value" id="stat-active-students">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Classroom Materials</div>
+                        <div class="stat-value" id="stat-materials-count">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Struggling Flags</div>
+                        <div class="stat-value" id="stat-struggle-count" style="color: var(--accent-orange);">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Grounded Answers</div>
+                        <div class="stat-value" id="stat-grounded-rate" style="color: var(--accent-emerald);">100%</div>
+                    </div>
+                </div>
+
+                <!-- Student Status Table Card -->
+                <div class="card">
+                    <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="users" style="color: var(--accent-cyan);"></i> Student Learning Tracking
+                    </h2>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Live topic tracking and AI-flagged learning gaps.</p>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Current Topic</th>
+                                    <th>Last Question Asked</th>
+                                    <th>Needs Support In</th>
+                                    <th>Last Interaction</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-table-body">
+                                <!-- Student rows dynamically inserted here -->
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: var(--text-secondary);">Loading student analytics...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Conversations Feed Card -->
+                <div class="card">
+                    <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="message-square" style="color: var(--accent-purple);"></i> Real-Time Classroom Feed
+                    </h2>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Recent student questions and AI tutor responses.</p>
+                    
+                    <div class="recent-chats-list" id="recent-chats-feed">
+                        <!-- Conversations dynamically inserted here -->
+                        <div style="font-size: 0.875rem; color: var(--text-secondary); text-align: center; padding: 2rem 0;">No student interactions logged yet.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="teacher.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

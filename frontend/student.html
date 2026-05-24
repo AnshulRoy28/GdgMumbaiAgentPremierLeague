@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Voice Tutor - AI Educational Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">B</div>
+            <span>Baymax AI Tutor</span>
+        </div>
+        <nav>
+            <a href="student.html" class="active">Student Tutor</a>
+            <a href="teacher.html">Teacher Dashboard</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Student Selection Card (Auth) -->
+        <section id="auth-screen" class="card auth-container">
+            <h1>Welcome, Explorer!</h1>
+            <p>Select your profile or type a new name to begin learning with Baymax.</p>
+            
+            <div class="form-group">
+                <label for="student-select">Choose your name</label>
+                <select id="student-select">
+                    <option value="">-- Select Profile --</option>
+                    <option value="John">John</option>
+                    <option value="Jane">Jane</option>
+                    <option value="Alex">Alex</option>
+                    <option value="Emily">Emily</option>
+                    <option value="custom">Create New Profile...</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="custom-name-group" style="display: none;">
+                <label for="student-custom-name">Enter your name</label>
+                <input type="text" id="student-custom-name" placeholder="Type your name here...">
+            </div>
+
+            <button id="start-btn" class="btn">Start Learning</button>
+        </section>
+
+        <!-- Main Chat Interface -->
+        <section id="chat-screen" class="card chat-layout" style="display: none;">
+            <div class="chat-header-profile">
+                <div class="student-info">
+                    <div class="avatar" id="student-avatar">J</div>
+                    <div>
+                        <div class="student-name" id="display-name">John</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.15rem;">
+                            Learning Topic: <span id="current-topic-tag" class="topic-badge">General</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="switch-profile-btn" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); box-shadow: none;">
+                    Switch Profile
+                </button>
+            </div>
+
+            <!-- Chat Message List -->
+            <div class="chat-history" id="chat-history">
+                <div class="message assistant">
+                    <h3>Baymax</h3>
+                    <p>Hello! I am Baymax, your personal learning companion. I am here to help you understand your class materials. You can hold down the microphone button (or press and hold the <strong>Spacebar</strong>) to ask me a question, or type below!</p>
+                </div>
+            </div>
+
+            <!-- Voice Control Area -->
+            <div class="voice-controller">
+                <div class="record-btn-container">
+                    <button class="record-btn" id="record-btn">
+                        <i data-lucide="mic"></i>
+                    </button>
+                    <div class="pulse-ring"></div>
+                </div>
+                <div class="voice-status" id="voice-status">Hold Spacebar or Click Mic to talk</div>
+            </div>
+
+            <!-- Fallback Text Input -->
+            <div class="input-fallback-container">
+                <input type="text" id="text-input" placeholder="Type your question here instead...">
+                <button id="send-btn" class="btn btn-send">Send</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="student.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
